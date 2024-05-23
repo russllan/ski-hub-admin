@@ -1,17 +1,26 @@
-import { useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import HomePage from './pages/home/HomePage'
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import HomePage from "./pages/home/HomePage";
+import AuthPage from "./pages/auth/AuthPage";
+import "./index.css";
+import NavBar from "./components/navbar/NavBar";
+import PrivateRoute from "./components/providers/PrivateRoute";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const location = useLocation();
 
   return (
-    <>
+    <div className="flex">
+      {location.pathname !== "/auth" && <NavBar />}
       <Routes>
-        <Route path='/' Component={HomePage}/>
+        <Route path="/auth" Component={AuthPage} />
+        <Route
+          path="/adminHome"
+          element={<PrivateRoute element={<HomePage />} />}
+        />
+        <Route path="*" element={<Navigate to="/auth" />} />
       </Routes>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
