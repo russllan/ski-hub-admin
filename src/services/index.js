@@ -4,6 +4,7 @@ export const base_URL = "https://skihub-server-production.up.railway.app/api";
 
 const $api = axios.create({
   baseURL: base_URL,
+  withCredentials: false,
 });
 
 $api.interceptors.request.use(
@@ -11,7 +12,7 @@ $api.interceptors.request.use(
     try {
       const token = await localStorage.getItem("key");
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
       }
       return config;
     } catch (error) {
