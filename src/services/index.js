@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const base_URL = "https://skihub-server-production.up.railway.app/api";
+// export const base_URL = "http://localhost:3000/api";
 
 const $api = axios.create({
   baseURL: base_URL,

@@ -14,7 +14,7 @@ class BaseService {
     return response.data;
   }
   async patch(data) {
-    const response = await $api.patch(`/bases/${data.id}`, data.data);
+    const response = await $api.put(`/bases/${data.id}`, data.data);
     return response.data;
   }
 }
