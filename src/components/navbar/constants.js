@@ -1,15 +1,15 @@
 export const data = [
     {
       name: "Dashboard",
-      link: "/dashboard",
+      link: "/adminHome",
     },
     {
       name: "Equipment",
       link: "/equipment",
     },
     {
-      name: "Base",
-      link: "/base",
+      name: "Tour",
+      link: "/tour",
     },
     {
       name: "Settings",
