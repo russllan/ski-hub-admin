@@ -11,8 +11,8 @@ class EquipmentService {
     return response.data;
   }
 
-  async update(id) {
-    const response = await $api.patch(`/product/${id}`);
+  async update(data) {
+    const response = await $api.put(`/product/${data.id}`, data.data);
     return response.data;
   }
 
