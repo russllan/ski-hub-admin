@@ -8,3 +8,11 @@ export const useOneBase = (id) => {
     enabled: !!id,
   });
 };
+
+
+export const useManyBases = () => {
+  return useQuery({
+    queryKey:["manyBases"],
+    queryFn: async() => await baseService.getAll() 
+  })
+}
