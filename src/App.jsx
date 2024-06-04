@@ -5,12 +5,16 @@ import "./index.css";
 import NavBar from "./components/navbar/NavBar";
 import PrivateRoute from "./components/providers/PrivateRoute";
 import Equipment from "./pages/equipment/Equipment";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify"
+import AddNewAdmin from "./pages/addNewAdmin";
+import PagesContainer from "./components/PagesContainer";
 
 function App() {
   const location = useLocation();
 
   return (
-    <div className="flex gap-7">
+    <div className="flex ">
       {location.pathname !== "/auth" && <NavBar />}
       <Routes>
         <Route path="/auth" Component={AuthPage} />
@@ -20,10 +24,14 @@ function App() {
         />
         <Route
           path="/equipment"
-          element={<PrivateRoute element={<Equipment />} />}
+          element={<PrivateRoute element={<PagesContainer><Equipment /></PagesContainer>} />}
         />
-        <Route path="*" element={<Navigate to="/auth" />} />
+        <Route
+          path="/addnewadmin"
+          element={<PagesContainer><AddNewAdmin /></PagesContainer>}
+        />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
