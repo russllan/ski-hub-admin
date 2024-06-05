@@ -13,7 +13,7 @@ export default function NavBar() {
           <div key={item.name}>
             {item.link === "/addnewadmin" && !isSupAdmin ? (
               <div
-                className="w-60 rounded-[5px]  bg-gray-300 text-gray-500 cursor-not-allowed"
+                className="w-60 rounded-[5px] py-2 px-5  bg-gray-300 text-gray-500 cursor-not-allowed"
               >
                 <h3>{item.name}</h3>
               </div>

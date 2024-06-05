@@ -20,7 +20,7 @@ function App() {
         <Route path="/auth" Component={AuthPage} />
         <Route
           path="/adminHome"
-          element={<PrivateRoute element={<HomePage />} />}
+          element={<PrivateRoute element={<PagesContainer><HomePage /></PagesContainer>} />}
         />
         <Route
           path="/equipment"

@@ -7,8 +7,7 @@ import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/re
 export default function AddNewAdmin() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
-    const [isCreated, setIsCreated] = useState(false);
-    const [createdUser, setUser] = useState(null);
+
 
     const queryClient = useQueryClient();
 
@@ -30,8 +29,6 @@ export default function AddNewAdmin() {
                     role: "admin",
                     isBanned: false,
                 });
-                setUser(result);
-                setIsCreated(true);
                 toast.success("Successfully created!");
                 queryClient.invalidateQueries({ queryKey: ["admin"] });
             } else {

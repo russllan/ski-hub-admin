@@ -1,24 +1,26 @@
-import { useManyBases, useOneBase } from "../../hooks/useBase";
-import BaseCard from "../../components/baseCard/BaseCard";
+import React from 'react';
+import { useManyBases } from "../../hooks/useBase";
 import ReviewCard from "../../components/reviewCard/ReviewCard";
+import { Link, useLocation } from 'react-router-dom';
 
 export default function HomePage() {
-  // const { data, isPending } = useOneBase(3);
-  const {data , isPending , isLoading} = useManyBases()
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const filter = searchParams.get('filter');
 
-  console.log(data);
+  const { data, isPending, isLoading } = useManyBases();
 
-  
-
-  !isPending && console.log(data);
-
-  if(isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <h1>Loading...</h1>;
   return (
-    <div className={`h-screen w-full`}>
-      {/* <BaseCard item={data} />
-      {data?.reviews?.map((item) => (
-        <ReviewCard item={item} />
-      ))} */}
+    <div className="h-screen w-full">
+      <header>
+        <Link to="?filter=mytours">Мои туры</Link>
+      </header>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {data?.map((item) => (
+          <ReviewCard key={item.id} item={item} {...item} />
+        ))}
+      </div>
     </div>
   );
 }
