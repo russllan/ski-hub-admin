@@ -10,7 +10,7 @@ export default function AddNewAdmin() {
     const [isCreated, setIsCreated] = useState(false);
     const [createdUser, setUser] = useState(null);
 
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient();
 
     const { data, error, isLoading } = useQuery({
         queryKey: ['admin'],
@@ -32,39 +32,70 @@ export default function AddNewAdmin() {
                 });
                 setUser(result);
                 setIsCreated(true);
-                toast.success("Success created!");
+                toast.success("Successfully created!");
+                queryClient.invalidateQueries({ queryKey: ["admin"] });
             } else {
                 toast.error("Write phone number & password");
             }
         } catch (error) {
-            toast.error("This user is already exist!");
+            toast.error("This user already exists!");
         }
     };
+
+    const onToggleBanAdmin = async (id, isBanned) => {
+        try {
+            await $api.put(`/user/adminUpdate/${id}`, { isBanned: !isBanned });
+            toast.success(`Admin ${!isBanned ? 'banned' : 'unbanned'} successfully!`);
+            queryClient.invalidateQueries({ queryKey: ["admin"] });
+        } catch (error) {
+            toast.error(`Failed to ${!isBanned ? 'ban' : 'unban'} admin!`);
+        }
+    };
+
+    // const onDeleteAdmin = async (id) => {
+    //     try {
+    //         await $api.delete(`/user/delete/${id}`);
+    //         toast.success("Admin deleted successfully!");
+    //         queryClient.invalidateQueries({ queryKey: ["admin"] });
+    //     } catch (error) {
+    //         toast.error("Failed to delete admin!");
+    //     }
+    // };
 
     const mutation = useMutation({
         mutationFn: (e) => onCreateNewAdmin(e),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["admin"] })
+            queryClient.invalidateQueries({ queryKey: ["admin"] });
         }
-    })
-
-    console.log(data);
+    });
 
     return (
         <>
             <form className={scss.wrapper} onSubmit={(e) => { mutation.mutate(e) }}>
-                <input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type="text" />
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
-                <button className="bg-blue-950 hover:bg-blue-600 transition-all">Create new Admin</button>
+                <div className={scss.inputContainer}>
+                    <label htmlFor="phoneNumber">Phone Number</label>
+                    <input id="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type="text" />
+                </div>
+                <div className={scss.inputContainer}>
+                    <label htmlFor="password">Password</label>
+                    <input id="password" value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
+                </div>
+                <button className={`${scss.createButton}`}>Create new Admin</button>
             </form>
-            <div>
+            <div className={scss.adminList}>
                 {isLoading && <p>Loading...</p>}
                 {error && <p>Error: {error.message}</p>}
                 {data && (
                     <ul>
                         {data?.map((user) => (
-                            <li key={user.id}>
+                            <li key={user.id} className={`${scss.adminItem} ${user.isBanned ? scss.banned : ''}`}>
                                 {user.phoneNumber} ({user.role})
+                                <div className={scss.buttonContainer}>
+                                    <button className={scss.banButton} onClick={() => onToggleBanAdmin(user.id, user.isBanned)}>
+                                        {user.isBanned ? 'Unban' : 'Ban'}
+                                    </button>
+                                    {/* <button className={scss.deleteButton} onClick={() => onDeleteAdmin(user.id)}>Delete</button> */}
+                                </div>
                             </li>
                         ))}
                     </ul>
