@@ -16,7 +16,7 @@ export const headerData = [
     criteria: "clothes",
   },
   {
-    title: "Акссесуары",
+    title: "Снаряжение",
     criteria: "accessories",
   },
 ];

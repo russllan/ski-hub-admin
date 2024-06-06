@@ -1,4 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
+
+// EquipmentEditForm.js
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import equipmentService from "../../services/equipment.service";
 
@@ -21,11 +23,17 @@ function EquipmentEditForm({ item }) {
     weight: item?.weight,
   };
 
-  const [formData, setFormData] = useState(initialData);
+  const queryClient = useQueryClient();
 
-  const { mutateAsync, isPending } = useMutation({
-    mutationKey: ["update-quipment"],
+  const [formData, setFormData] = useState(initialData);
+  const [changedFields, setChangedFields] = useState({});
+
+  const { mutateAsync, isLoading } = useMutation({
+    mutationKey: ["update-equipment"],
     mutationFn: async (data) => equipmentService.update(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["equipment"] });
+    },
   });
 
   const handleChange = (e) => {
@@ -34,6 +42,10 @@ function EquipmentEditForm({ item }) {
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
+    setChangedFields({
+      ...changedFields,
+      [name]: formData[name] !== (type === "checkbox" ? checked : value),
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -41,8 +53,8 @@ function EquipmentEditForm({ item }) {
     const updatedData = onEditData();
     const id = item.id;
     if (Object.keys(updatedData).length > 0) {
-      console.log("Updated data:", id, {updatedData});
-      await mutateAsync({ id, updatedData });
+      console.log("Updated data:", id, updatedData);
+      await mutateAsync({ id, data: updatedData });
     } else {
       console.log("No changes detected.");
     }
@@ -77,7 +89,8 @@ function EquipmentEditForm({ item }) {
                   name={key}
                   checked={formData[key]}
                   onChange={handleChange}
-                  className="mr-2 leading-tight"
+                  className={`mr-2 leading-tight ${changedFields[key] ? "bg-yellow-100" : ""
+                    }`}
                 />
               ) : key === "startDate" || key === "endDate" ? (
                 <input
@@ -86,7 +99,8 @@ function EquipmentEditForm({ item }) {
                   name={key}
                   value={formData[key].substring(0, 10)}
                   onChange={handleChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${changedFields[key] ? "bg-yellow-100" : ""
+                    }`}
                 />
               ) : (
                 <input
@@ -95,17 +109,17 @@ function EquipmentEditForm({ item }) {
                   name={key}
                   value={formData[key]}
                   onChange={handleChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${changedFields[key] ? "bg-yellow-100" : ""
+                    }`}
                 />
               )}
             </div>
           ))}
           <button
-            onClick={onEditData}
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            {isPending ? "Обновление..." : "Сохранить"}
+            {isLoading ? "Обновление..." : "Сохранить"}
           </button>
         </form>
       </div>
