@@ -6,8 +6,8 @@ class EquipmentService {
     return response.data;
   }
 
-  async create() {
-    const response = await $api.post(`/product/create`);
+  async create(data) {
+    const response = await $api.post(`/product/create`, data);
     return response.data;
   }
 

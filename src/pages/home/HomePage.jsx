@@ -11,6 +11,7 @@ export default function HomePage() {
   const searchParams = new URLSearchParams(location.search);
   const filter = searchParams.get('filter');
 
+
   const { data, isPending, isLoading } = useManyBases();
   const [adminBases, setBases] = useState([]);
   const [selectedBase, setSelectedBase] = useState(null);
@@ -42,7 +43,12 @@ export default function HomePage() {
       {/* <header className="mb-4">
         <Link to="?filter=mytours" className="text-blue-500 underline">Мои туры</Link>
       </header> */}
-      <h1 className="text-2xl font-bold mb-4">Ваши базы</h1>
+      <div className='flex justify-between '>
+        <h1 className="text-2xl font-bold mb-4">Ваши базы</h1>
+        <Link to={"/adminHome/create"} className='cursor-pointer bg-blue-400  px-5 rounded-md text-white  text-center items-center flex'>
+          <p>Создать новую базу</p>
+        </Link>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {adminBases.map((item) => (
           <div key={item.id} className="relative" onClick={() => handleEditClick(item)}>

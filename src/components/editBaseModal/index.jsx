@@ -3,11 +3,14 @@ import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import $api from '../../services';
 import "./EditBaseModal.css"
+import { useQueryClient } from '@tanstack/react-query';
 
 Modal.setAppElement('#root'); // Ensure screen readers work
 
 function EditBaseModal({ isOpen, onRequestClose, base, onUpdate }) {
     const [formData, setFormData] = useState({ ...base });
+
+    const queryClient = useQueryClient()
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -33,6 +36,7 @@ function EditBaseModal({ isOpen, onRequestClose, base, onUpdate }) {
             await $api.delete("/bases/" + base.id)
             toast.success('Base deleted successfully!');
             onUpdate();
+            queryClient.invalidateQueries({ queryKey: ["manyBases"] })
             onRequestClose();
         } catch {
             toast.error('Failed to update base!');
