@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify"
 import AddNewAdmin from "./pages/addNewAdmin";
 import PagesContainer from "./components/PagesContainer";
 import CreateBase from "./pages/createBase";
+import ToursPage from "./pages/tours";
 
 function App() {
   const location = useLocation();
@@ -30,6 +31,10 @@ function App() {
         <Route
           path="/equipment"
           element={<PrivateRoute element={<PagesContainer><Equipment /></PagesContainer>} />}
+        />
+        <Route
+          path="/tour"
+          element={<PrivateRoute element={<PagesContainer><ToursPage /></PagesContainer>} />}
         />
         <Route
           path="/addnewadmin"
