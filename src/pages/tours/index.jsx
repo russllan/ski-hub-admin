@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import $api from '../../services';
 import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root'); // Set this to your root element
 
@@ -43,9 +44,18 @@ function ToursPage() {
         closeModal();
     };
 
+    const navigate = useNavigate()
+
     return (
         <div className="min-h-screen p-4">
-            <h1 className="text-2xl font-bold text-center mb-8">Tours</h1>
+            <div className='flex  justify-between mb-5'>
+                <h1 className="text-2xl font-bold text-center mb-8">Tours</h1>
+
+                <button
+                    className="cursor-pointer bg-blue-400  px-5 rounded-md text-white"
+                    onClick={() => navigate("create")}
+                >Create Tour</button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {data?.data.map(tour => (
                     <div key={tour.id} className="bg-white p-6 rounded-lg shadow-md cursor-pointer" onClick={() => openModal(tour)}>

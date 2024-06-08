@@ -11,6 +11,7 @@ import AddNewAdmin from "./pages/addNewAdmin";
 import PagesContainer from "./components/PagesContainer";
 import CreateBase from "./pages/createBase";
 import ToursPage from "./pages/tours";
+import CreateTour from "./pages/createTour";
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,10 @@ function App() {
         <Route
           path="/tour"
           element={<PrivateRoute element={<PagesContainer><ToursPage /></PagesContainer>} />}
+        />
+        <Route
+          path="/tour/create"
+          element={<PrivateRoute element={<PagesContainer><CreateTour /></PagesContainer>} />}
         />
         <Route
           path="/addnewadmin"
