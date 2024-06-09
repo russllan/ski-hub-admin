@@ -41,7 +41,7 @@ function BasesPayments() {
 
     const getChartData = () => {
         const labels = payments.map(payment => new Date(payment.createdAt).toLocaleDateString());
-        const data = payments.map(payment => payment.price / 100);
+        const data = payments.map(payment => payment.price / 100 );
     
         return {
           labels,

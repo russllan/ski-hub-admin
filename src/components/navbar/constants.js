@@ -12,6 +12,10 @@ export const data = [
     link: "/tour",
   },
   {
+    name:"Booked Tours",
+    link:"/bookedtour"
+  },
+  {
     name: "Settings",
     link: "/settings",
   },

@@ -13,6 +13,7 @@ import CreateBase from "./pages/createBase";
 import ToursPage from "./pages/tours";
 import CreateTour from "./pages/createTour";
 import BasesPayments from "./pages/basesPayments";
+import BookedProductPage from "./pages/bookedtour";
 
 function App() {
   const location = useLocation();
@@ -24,7 +25,12 @@ function App() {
         <Route path="/auth" Component={AuthPage} />
         <Route
           path="/adminHome"
+
           element={<PrivateRoute element={<PagesContainer><HomePage /></PagesContainer>} />}
+        />
+        <Route
+          path="/bookedtour"
+          element={<PrivateRoute element={<PagesContainer><BookedProductPage /></PagesContainer>} />}
         />
         <Route
           path="/adminHome/create"
@@ -46,7 +52,7 @@ function App() {
           path="/addnewadmin"
           element={<PagesContainer><AddNewAdmin /></PagesContainer>}
         />
-         <Route
+        <Route
           path="/basespayments"
           element={<PagesContainer><BasesPayments /></PagesContainer>}
         />
