@@ -76,11 +76,11 @@ function BasesPayments() {
                 </tr>
               </thead>
               <tbody className="text-gray-600 text-sm font-light">
-                {payments.map((payment) => (
+                {payments?.map((payment) => (
                   <tr key={payment.id} className="border-b border-gray-200 hover:bg-gray-100">
-                    <td className="py-3 px-6 text-left whitespace-nowrap">{payment.user.name}</td>
-                    <td className="py-3 px-6 text-left">{payment.amount}</td>
-                    <td className="py-3 px-6 text-left">{payment.date}</td>
+                    <td className="py-3 px-6 text-left whitespace-nowrap">{payment.currency}</td>
+                    <td className="py-3 px-6 text-left">{payment.price}</td>
+                    <td className="py-3 px-6 text-left">{payment.createdAt}</td>
                   </tr>
                 ))}
               </tbody>
