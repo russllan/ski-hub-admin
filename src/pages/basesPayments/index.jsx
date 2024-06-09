@@ -65,13 +65,13 @@ function BasesPayments() {
       </section>
       {selectedBase && (
         <section>
-          <h2 className="text-2xl font-bold mb-4">Payments for {selectedBase.title}</h2>
+          <h2 className="text-2xl font-bold mb-4">Payments for {selectedBase.title} {payments.length && <> <h2> Вся сумма {payments.reduce((acc , el) => acc + el.price , 0) / 100} сом</h2></>}</h2>
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white rounded-lg shadow-md">
               <thead>
                 <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                  <th className="py-3 px-6 text-left">User</th>
-                  <th className="py-3 px-6 text-left">Amount</th>
+                  <th className="py-3 px-6 text-left">Currency</th>
+                  <th className="py-3 px-6 text-left">Price</th>
                   <th className="py-3 px-6 text-left">Date</th>
                 </tr>
               </thead>
@@ -79,7 +79,7 @@ function BasesPayments() {
                 {payments?.map((payment) => (
                   <tr key={payment.id} className="border-b border-gray-200 hover:bg-gray-100">
                     <td className="py-3 px-6 text-left whitespace-nowrap">{payment.currency}</td>
-                    <td className="py-3 px-6 text-left">{payment.price}</td>
+                    <td className="py-3 px-6 text-left">{payment.price / 100} сом</td>
                     <td className="py-3 px-6 text-left">{payment.createdAt}</td>
                   </tr>
                 ))}
