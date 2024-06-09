@@ -5,6 +5,9 @@ import React, { useState } from "react";
 import equipmentService from "../../services/equipment.service";
 
 function EquipmentEditForm({ item }) {
+
+
+
   const initialData = {
     amount: item?.amount,
     color: item?.color,

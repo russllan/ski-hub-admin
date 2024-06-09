@@ -12,6 +12,7 @@ import PagesContainer from "./components/PagesContainer";
 import CreateBase from "./pages/createBase";
 import ToursPage from "./pages/tours";
 import CreateTour from "./pages/createTour";
+import BasesPayments from "./pages/basesPayments";
 
 function App() {
   const location = useLocation();
@@ -44,6 +45,10 @@ function App() {
         <Route
           path="/addnewadmin"
           element={<PagesContainer><AddNewAdmin /></PagesContainer>}
+        />
+         <Route
+          path="/basespayments"
+          element={<PagesContainer><BasesPayments /></PagesContainer>}
         />
       </Routes>
       <ToastContainer />

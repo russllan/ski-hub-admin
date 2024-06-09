@@ -1,6 +1,6 @@
 export const data = [
   {
-    name: "Dashboard",
+    name: "Bases",
     link: "/adminHome",
   },
   {
@@ -16,7 +16,12 @@ export const data = [
     link: "/settings",
   },
   {
+    name: "Payments",
+    link: "/basespayments"
+  },
+  {
     name: "Add new Admin",
     link: "/addnewadmin",
   },
+
 ];

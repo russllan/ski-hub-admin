@@ -10,7 +10,7 @@ function EquipmentCreateForm() {
     image: '',
     amount: 0,
     cost: 0,
-    type: 'accessories',
+    type: 'Снаряжение',
     size: '',
     height: 0,
     weight: 0,
@@ -23,11 +23,29 @@ function EquipmentCreateForm() {
     isBooked: false
   });
 
+
+    // {
+  //   "title": "string",
+  //   "image": "string",
+  //   "amount": 0,
+  //   "cost": 0,
+  //   "type": "string",
+  //   "size": "string",
+  //   "height": 0,
+  //   "weight": 0,
+  //   "color": "string",
+  //   "gender": "string",
+  //   "text": "string",
+  //   "startDate": "2024-06-09T09:15:55.036Z",
+  //   "endDate": "2024-06-09T09:15:55.036Z",
+  //   "status": "string",
+  //   "isBooked": true
+  // }
+
   const [isType, setIsType] = useState(false);
 
   const queryClient = useQueryClient()
 
-  const mutation = useMutation((newEquipment) => equipmentService.create(newEquipment));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,17 +76,17 @@ function EquipmentCreateForm() {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
-    await $api.post("/product/create", { ...createData })
+    await $api.post("/product/create", createData )
     queryClient.invalidateQueries({ queryKey: ["equipment"] })
-    // mutation.mutate(createData)
   };
 
   const toggleType = () => {
     setIsType(!isType);
     setCreateData({
       ...createData,
-      type: isType ? 'accessories' : 'clothes'
+      type: isType ? 'Снаряжение' : 'Одежда'
     });
   };
 
@@ -126,8 +144,8 @@ function EquipmentCreateForm() {
           </button>
         </div>
       </form>
-      {mutation.isError && <p className="text-red-500 mt-4 text-center">Произошла ошибка при создании оборудования.</p>}
-      {mutation.isSuccess && <p className="text-green-500 mt-4 text-center">Оборудование успешно создано!</p>}
+      {/* {mutation.isError && <p className="text-red-500 mt-4 text-center">Произошла ошибка при создании оборудования.</p>}
+      {mutation.isSuccess && <p className="text-green-500 mt-4 text-center">Оборудование успешно создано!</p>} */}
     </div>
   );
 }

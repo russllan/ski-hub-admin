@@ -19,8 +19,6 @@ function CreateTourPage() {
         base: ''
     });
 
-    if (isBasesLoading) return <h1>Loading....</h1>;
-    if (!basesData) return <h1>No data available</h1>;
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -45,6 +43,8 @@ function CreateTourPage() {
         // Redirect or update UI as needed
 
     };
+    if (isBasesLoading) return <h1>Loading....</h1>;
+    if (!basesData) return <h1>No data available</h1>;
 
     return (
         <div className="min-h-screen ">

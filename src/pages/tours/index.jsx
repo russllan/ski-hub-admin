@@ -11,9 +11,10 @@ function ToursPage() {
     const [selectedTour, setSelectedTour] = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
+    const navigate = useNavigate()
+
+
     const queryClient = useQueryClient()
-    if (isLoading) return <h1>Loading....</h1>;
-    if (!data) return <h1>No data available</h1>;
 
     const openModal = (tour) => {
         setSelectedTour(tour);
@@ -44,7 +45,8 @@ function ToursPage() {
         closeModal();
     };
 
-    const navigate = useNavigate()
+    if (isLoading) return <h1>Loading....</h1>;
+    if (!data) return <h1>No data available</h1>;
 
     return (
         <div className="min-h-screen p-4">
