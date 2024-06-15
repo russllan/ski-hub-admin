@@ -31,7 +31,7 @@ export default function Equipment() {
   return (
     <div className="flex flex-col gap-6">
       <Header onFilterChange={setFilter} />
-      <div className="w-full grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="w-full flex flex-wrap gap-7">
         {filteredData?.map((item) => (
           <EquipmentCard key={item.id} item={item} />
         ))}

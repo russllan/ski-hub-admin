@@ -76,14 +76,14 @@ function BookedProductPage() {
                 className={`bg-blue-500 text-white py-1 px-2 rounded ${mutation.isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                 disabled={mutation.isLoading}
               >
-                Toggle PickUp
+                Забрал
               </button>
               <button
                 onClick={() => toggleIsRefund(item.id, item.isRefund , item)}
                 className={`bg-green-500 text-white py-1 px-2 rounded ${mutation.isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                 disabled={mutation.isLoading}
               >
-                Toggle Refund
+                Вернул
               </button>
             </div>
           </div>

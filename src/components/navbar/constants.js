@@ -1,31 +1,34 @@
 export const data = [
   {
-    name: "Bases",
+    name: "Базы",
     link: "/adminHome",
   },
   {
-    name: "Equipment",
+    name: "Снаряжения",
     link: "/equipment",
   },
   {
-    name: "Tour",
+    name: "Туры",
     link: "/tour",
   },
   {
-    name:"Booked Tours",
-    link:"/bookedtour"
+    name: "Забронированные продукты",
+    link: "/bookedtour",
   },
   {
-    name: "Settings",
-    link: "/settings",
+    name: "Забронированные туры",
+    link: "/bookedTours",
   },
   {
-    name: "Payments",
-    link: "/basespayments"
+    name: "Оплаты",
+    link: "/basespayments",
   },
   {
     name: "Add new Admin",
     link: "/addnewadmin",
   },
-
+  {
+    name: "Выход",
+    link: "/auth",
+  },
 ];

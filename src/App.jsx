@@ -14,6 +14,7 @@ import ToursPage from "./pages/tours";
 import CreateTour from "./pages/createTour";
 import BasesPayments from "./pages/basesPayments";
 import BookedProductPage from "./pages/bookedtour";
+import BookedToursPage from "./pages/bookedTours";
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,10 @@ function App() {
         <Route
           path="/bookedtour"
           element={<PrivateRoute element={<PagesContainer><BookedProductPage /></PagesContainer>} />}
+        />
+         <Route
+          path="/bookedTours"
+          element={<PrivateRoute element={<PagesContainer><BookedToursPage /></PagesContainer>} />}
         />
         <Route
           path="/adminHome/create"
