@@ -21,6 +21,8 @@ export default function HomePage() {
     try {
       const res = await $api.get("/bases/adminGet");
       setBases(res.data);
+      console.log(res.data);
+      localStorage.setItem("baseId", res.data[0].id);
     } catch (e) {
       toast.error("No Tours you have yet");
     }
