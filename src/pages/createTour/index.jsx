@@ -12,7 +12,9 @@ function CreateTourPage() {
         cost: '',
         status: '',
         text: '',
+        image: '',
         amountDay: '',
+        amount: 1,
         startDate: '',
         endDate: '',
         isBooked: false,
@@ -70,9 +72,17 @@ function CreateTourPage() {
                     <label className="block text-gray-700">Description</label>
                     <textarea name="text" value={formData.text} onChange={handleInputChange} className="w-full p-2 border rounded" required></textarea>
                 </div>
-                <div className="mb-4">
+                {/* <div className="mb-4">
                     <label className="block text-gray-700">Duration (days)</label>
                     <input type="number" name="amountDay" value={formData.amountDay} onChange={handleInputChange} className="w-full p-2 border rounded" required />
+                </div> */}
+                <div className="mb-4">
+                    <label className="block text-gray-700">image</label>
+                    <input type="string" name="image" value={formData.image} onChange={handleInputChange} className="w-full p-2 border rounded" required />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700">Кол-во людей</label>
+                    <input type="number" name="amount" value={formData.amount} onChange={handleInputChange} className="w-full p-2 border rounded" required />
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700">Start Date</label>
@@ -82,10 +92,10 @@ function CreateTourPage() {
                     <label className="block text-gray-700">End Date</label>
                     <input type="date" name="endDate" value={formData.endDate} onChange={handleInputChange} className="w-full p-2 border rounded" required />
                 </div>
-                <div className="mb-4">
+                {/* <div className="mb-4">
                     <label className="block text-gray-700">Booked</label>
                     <input type="checkbox" name="isBooked" checked={formData.isBooked} onChange={handleInputChange} className="w-4 h-4 text-blue-600" />
-                </div>
+                </div> */}
                 <div className="mb-4">
                     <label className="block text-gray-700">Base</label>
                     <select name="base" value={formData.base} onChange={handleInputChange} className="w-full p-2 border rounded" required>

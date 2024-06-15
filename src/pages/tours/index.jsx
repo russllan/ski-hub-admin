@@ -95,6 +95,10 @@ function ToursPage() {
                             <input type="text" name="location" value={selectedTour.location} onChange={handleInputChange} className="w-full p-2 border rounded" />
                         </div>
                         <div className="mb-4">
+                            <label className="block text-gray-700">Image</label>
+                            <input type="text" name="image" value={selectedTour.image} onChange={handleInputChange} className="w-full p-2 border rounded" />
+                        </div>
+                        <div className="mb-4">
                             <label className="block text-gray-700">Cost</label>
                             <input type="number" name="cost" value={selectedTour.cost} onChange={handleInputChange} className="w-full p-2 border rounded" />
                         </div>
