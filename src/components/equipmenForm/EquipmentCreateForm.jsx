@@ -6,46 +6,25 @@ import { useQueryClient } from "@tanstack/react-query";
 
 function EquipmentCreateForm() {
   const [createData, setCreateData] = useState({
-    title: '',
-    image: '',
+    title: "",
+    image: "",
     amount: 0,
     cost: 0,
-    type: 'Снаряжение',
-    size: '',
+    type: "",
+    size: "",
     height: 0,
     weight: 0,
-    color: '',
-    gender: '',
-    text: '',
-    startDate: '',
-    endDate: '',
-    status: '',
-    isBooked: false
+    color: "",
+    gender: "",
+    text: "",
+    status: "",
+    isBooked: false,
+    base: Number(localStorage.getItem("baseId")),
   });
-
-
-    // {
-  //   "title": "string",
-  //   "image": "string",
-  //   "amount": 0,
-  //   "cost": 0,
-  //   "type": "string",
-  //   "size": "string",
-  //   "height": 0,
-  //   "weight": 0,
-  //   "color": "string",
-  //   "gender": "string",
-  //   "text": "string",
-  //   "startDate": "2024-06-09T09:15:55.036Z",
-  //   "endDate": "2024-06-09T09:15:55.036Z",
-  //   "status": "string",
-  //   "isBooked": true
-  // }
 
   const [isType, setIsType] = useState(false);
 
-  const queryClient = useQueryClient()
-
+  const queryClient = useQueryClient();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,64 +55,61 @@ function EquipmentCreateForm() {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-    await $api.post("/product/create", createData )
-    queryClient.invalidateQueries({ queryKey: ["equipment"] })
+    const dataToSend = {
+      ...createData,
+      type: isType ? "Одежда" : "Снаряжение",
+    };
+    await $api.post("/product/create", dataToSend);
+    queryClient.invalidateQueries({ queryKey: ["equipment"] });
   };
 
   const toggleType = () => {
     setIsType(!isType);
-    setCreateData({
-      ...createData,
-      type: isType ? 'Снаряжение' : 'Одежда'
-    });
   };
 
   return (
-    <div className="max-h-[800px] bg-white shadow-lg rounded-lg p-6" style={{ overflowY: "scroll" }}>
-      <h1 className="text-2xl font-bold mb-4 text-center">Создать снаряжение</h1>
+    <div
+      className="max-h-[800px] bg-white shadow-lg rounded-lg p-6"
+      style={{ overflowY: "scroll" }}
+    >
+      <h1 className="text-2xl font-bold mb-4 text-center">
+        Создать снаряжение
+      </h1>
       <div className="mb-4 text-center">
         <button
           onClick={toggleType}
           className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:scale-105"
         >
-          {isType ? 'Снаряжение' : 'Одежда'}
+          {isType ? "Одежда" : "Снаряжение"}
         </button>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {Object.keys(createData).map((key) => (
-            key !== 'isBooked' && key !== 'type' && (
-              <div className="mb-4" key={key}>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={key}>
-                  {key.charAt(0).toUpperCase() + key.slice(1)}
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id={key}
-                  type={key === 'image' ? 'file' : 'text'}
-                  name={key}
-                  value={key === 'image' ? undefined : createData[key]}
-                  onChange={key === 'image' ? handleFileChange : handleChange}
-                  required
-                />
-              </div>
-            )
-          ))}
-          <div className="mb-4 col-span-1 md:col-span-2">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="isBooked">
-              Забронировано
-            </label>
-            <input
-              type="checkbox"
-              id="isBooked"
-              name="isBooked"
-              checked={createData.isBooked}
-              onChange={() => setCreateData({ ...createData, isBooked: !createData.isBooked })}
-              className="ml-2 leading-tight"
-            />
-          </div>
+          {Object.keys(createData).map(
+            (key) =>
+              key !== "isBooked" &&
+              key !== "type" && (
+                <div className="mb-4" key={key}>
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor={key}
+                  >
+                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id={key}
+                    type={key === "image" ? "file" : "text"}
+                    name={key}
+                    value={key === "image" ? undefined : createData[key]}
+                    onChange={key === "image" ? handleFileChange : handleChange}
+                    // required
+                  />
+                </div>
+              )
+          )}
+          <div className="mb-4 col-span-1 md:col-span-2"></div>
         </div>
         <div className="flex items-center justify-center mt-4">
           <button
@@ -144,8 +120,6 @@ function EquipmentCreateForm() {
           </button>
         </div>
       </form>
-      {/* {mutation.isError && <p className="text-red-500 mt-4 text-center">Произошла ошибка при создании оборудования.</p>}
-      {mutation.isSuccess && <p className="text-green-500 mt-4 text-center">Оборудование успешно создано!</p>} */}
     </div>
   );
 }

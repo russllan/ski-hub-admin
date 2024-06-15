@@ -100,7 +100,7 @@ function EquipmentEditForm({ item }) {
                   type="date"
                   id={key}
                   name={key}
-                  value={formData[key].substring(0, 10)}
+                  // value={formData[key].substring(0, 10)}
                   onChange={handleChange}
                   className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${changedFields[key] ? "bg-yellow-100" : ""
                     }`}

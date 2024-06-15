@@ -13,12 +13,12 @@ function CreateTourPage() {
         status: '',
         text: '',
         image: '',
-        amountDay: '',
+        amountDay: 2,
         amount: 1,
         startDate: '',
         endDate: '',
         isBooked: false,
-        base: ''
+        base: Number(localStorage.getItem('baseId')),
     });
 
 

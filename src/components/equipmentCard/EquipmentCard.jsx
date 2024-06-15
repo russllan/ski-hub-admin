@@ -36,7 +36,7 @@ console.log(item);
           <strong>Цвет:</strong> {item.color}
         </p>
         <p>
-          <strong>Цена:</strong> {item.cost} руб.
+          <strong>Цена:</strong> {item.cost} сом
         </p>
         <p>
           <strong>Пол:</strong> {item.gender}
