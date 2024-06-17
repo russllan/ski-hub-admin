@@ -41,20 +41,20 @@ function BasesPayments() {
 
     const getChartData = () => {
         const labels = payments.map(payment => new Date(payment.createdAt).toLocaleDateString());
-        const data = payments.map(payment => payment.price / 100 );
-    
+        const data = payments.map(payment => payment.price / 100);
+
         return {
-          labels,
-          datasets: [
-            {
-              label: 'Payment Amount',
-              data,
-              borderColor: 'rgba(75, 192, 192, 1)',
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            }
-          ]
+            labels,
+            datasets: [
+                {
+                    label: 'Payment for ' + new Date().getDate(),
+                    data,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                }
+            ]
         };
-      };
+    };
 
 
     return (
@@ -111,9 +111,9 @@ function BasesPayments() {
                     </div>
                 </section>
             )}
-           <div className="bg-white rounded-lg shadow-md p-6">
-            <Line data={getChartData()} />
-          </div>
+            <div className="bg-white rounded-lg shadow-md p-6 w-3/4 flex justify-center">
+                <Line data={getChartData()} />
+            </div>
         </div>
     );
 }
